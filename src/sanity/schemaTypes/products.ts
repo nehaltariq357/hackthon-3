@@ -11,12 +11,20 @@ export const productSchema = defineType({
       type: "string",
     },
     {
+      name: "slug",  //add slug for dynamic routing
+      title: "Slug",
+      type: "slug",
+      options: {
+        source: "title",
+      },
+    },
+    {
       name: "price",
       title: "Price",
       type: "number",
     },
     {
-      title: "Price without Discount",
+      title: "PricewithoutDiscount",
       name: "priceWithoutDiscount",
       type: "number",
     },

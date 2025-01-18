@@ -6,13 +6,14 @@ import { useAppDispatch } from "../redux/store/slice/hooks";
 import { addToCart } from "../redux/store/slice/cartSlice";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { client } from "@/sanity/lib/client";
+import { BsCart2 } from "react-icons/bs";
 interface types {
+  _id: string;
   title: string;
   price: number;
-  id: number;
-  image: string;
-  desc: string;
+  imageUrl: string;
+  description: string;
 }
 
 const Product = () => {
@@ -21,9 +22,18 @@ const Product = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch(`/api/product`); // Adjust for production
-      const data = await response.json();
-      setProduct(data);
+      try {
+        const query = `*[_type == "products"][0..2]{
+          _id, 
+          title, 
+          price, 
+          "imageUrl": image.asset->url, 
+        }`;
+        const data: types[] = await client.fetch(query);
+        setProduct(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
     };
     fetchPosts();
   }, []);
@@ -31,10 +41,10 @@ const Product = () => {
   const handleAddToCart = (item: types) => {
     dispatch(
       addToCart({
-        id: item.id,
+        id: item._id,
         title: item.title,
         price: item.price,
-        image: item.image,
+        image: item.imageUrl,
         quantity: 1,
       })
     );
@@ -46,16 +56,16 @@ const Product = () => {
   return (
     <main
       className="px-4 md:px-10 lg:px-20 min-h-screen"
-      style={{ backgroundColor: "white" }} // Explicitly setting background color
+      style={{ backgroundColor: "white" }}
     >
       <h1 className="text-3xl font-bold py-5 text-black">Featured Products</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-black">
         {product.map((post) => (
-          <div key={post.id} className="my-10">
+          <div key={post._id} className="my-10">
             <div className="space-y-5 w-full md:w-[90%]">
-              <Link href={`/product/${post.id}`}>
+              <Link href={`/product/${post._id}`}>
                 <Image
-                  src={post.image}
+                  src={post.imageUrl}
                   alt={post.title}
                   className="w-full h-auto object-cover"
                   width={500}
@@ -64,17 +74,18 @@ const Product = () => {
                 <h1 className="font-bold mt-5 text-lg md:text-2xl">
                   {post.title}
                 </h1>
-                <p className="md:text-base font-bold text-2xl mt-4">
-                  {`$${post.price}`}
-                </p>
+                {/* price and add to cart */}
+                <div className="flex justify-between">
+                  <p className="md:text-base font-bold text-2xl mt-4">{`$${post.price}`}</p>
+                  <button
+                    onClick={() => handleAddToCart(post)}
+                    className="text-black border-2 bg-customOffWhite px-5 py-2 rounded-md cursor-pointer hover:bg-customGreen hover:text-white w-fit"
+                  >
+                    <BsCart2 />
+                  </button>
+                </div>
               </Link>
-              <p className="text-sm md:text-base">{post.desc}</p>
-              <button
-                onClick={() => handleAddToCart(post)}
-                className="text-customGreen border-2 border-customGreen px-5 py-2 rounded-md cursor-pointer hover:bg-green-700 hover:text-white w-fit"
-              >
-                Add to Cart
-              </button>
+              {/* add to cart */}
             </div>
           </div>
         ))}
