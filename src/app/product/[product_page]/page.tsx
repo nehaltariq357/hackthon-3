@@ -5,25 +5,53 @@ import { useAppDispatch } from "../../redux/store/slice/hooks";
 import { addToCart } from "../../redux/store/slice/cartSlice";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { client } from "@/sanity/lib/client";
 
 interface types {
   title: string;
   price: number;
   id: number;
   image: string;
-  desc: string;
+  description: string;
   detailDesc: string;
+  imageUrl:string
+  PricewithoutDiscount:number
+  badge:string
+  inventory:number
+  category:{
+    title:string
+    CategoryImage:{
+      url:string
+    }
+  }
 }
 
 const ProductPage = ({ params }: { params: { product_page: string } }) => {
-  const [product, setProduct] = useState<types | null>(null);
+  const [product, setProduct] = useState<types |null>(null);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch(`/api/product?id=${params.product_page}`);// for production site, we use http://localhost:3000/api/product
-      const data = await response.json();
-      setProduct(data);
+      try {
+        const query = `*[_type == "products" && slug.current=="${params.product_page}"]
+{
+     _id, 
+          title, 
+          price, 
+            PricewithoutDiscount,
+            badge,
+            description,
+            inventory,
+            tags,
+          "imageUrl": image.asset->url,
+        category->{title,"CategoryImage":image.asset->{url}}
+        }[0]`;
+
+        const data: types = await client.fetch(query);
+        setProduct(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
     };
     fetchPosts();
   }, [params.product_page]);
@@ -59,7 +87,7 @@ const ProductPage = ({ params }: { params: { product_page: string } }) => {
           {/* Product Image */}
           <div className="w-full md:w-1/2 flex justify-center">
             <Image
-              src={product.image}
+              src={product.imageUrl}
               alt={product.title}
               className="object-cover rounded-lg"
               width={400}
@@ -71,7 +99,7 @@ const ProductPage = ({ params }: { params: { product_page: string } }) => {
           <div className="w-full md:w-1/2 space-y-5">
             <p className="text-xl font-bold text-green-600">{`$${product.price}`}</p>
             <p className="text-gray-700">{product.detailDesc}</p>
-            <p className="text-sm text-gray-500">{product.desc}</p>
+            <p className="text-sm text-gray-500">{product.description}</p>
 
             {/* Add to Cart Button */}
             <button

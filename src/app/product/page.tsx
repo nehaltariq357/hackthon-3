@@ -14,6 +14,7 @@ interface types {
   price: number;
   imageUrl: string;
   description: string;
+  slug: string;
 }
 
 const Product = () => {
@@ -23,12 +24,14 @@ const Product = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const query = `*[_type == "products"][0..2]{
+        const query = `*[_type == "products"]{
           _id, 
           title, 
           price, 
           "imageUrl": image.asset->url, 
-        }`;
+          "slug":slug.current
+        }[0..2]`;
+       
         const data: types[] = await client.fetch(query);
         setProduct(data);
       } catch (error) {
@@ -46,6 +49,7 @@ const Product = () => {
         price: item.price,
         image: item.imageUrl,
         quantity: 1,
+        
       })
     );
     toast.success("Item added to cart!", {
@@ -63,7 +67,7 @@ const Product = () => {
         {product.map((post) => (
           <div key={post._id} className="my-10">
             <div className="space-y-5 w-full md:w-[90%]">
-              <Link href={`/product/${post._id}`}>
+              <Link href={`/product/${post.slug}`}>
                 <Image
                   src={post.imageUrl}
                   alt={post.title}
