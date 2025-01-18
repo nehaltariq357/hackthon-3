@@ -9,43 +9,71 @@ const NavBar = () => {
   const [isopen, setopen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white z-50 text-black m-0">
-      <div className="container mx-auto flex items-center justify-between h-20 px-4 md:px-8">
-        {/* Logo and Brand Name */}
-        <ul className="flex items-center gap-4">
-          <li>
-            <Image src={`/images/logo.png`} alt="logo" width={40} height={50} />
-          </li>
-          <Link href={`/`}>
-            <li className="font-bold text-xl md:text-2xl cursor-pointer">
-              E-Commerce
-            </li>
-          </Link>
-        </ul>
-
+    <nav className="fixed top-0 left-0 w-full bg-white z-50 text-black">
+      <div className="flex items-center justify-between h-20 ">
         {/* Desktop Menu */}
-        <div>
-          <ul className="hidden md:flex items-center gap-8">
-            <Link href={`/`}>
-              <li className="hover:text-purple-600 cursor-pointer">Home</li>
-            </Link>
-            <Link href={`/product`}>
-              <li className="hover:text-purple-600 cursor-pointer">Product</li>
-            </Link>
-            <Link href={`/component/About`}>
-              <li className="hover:text-purple-600 cursor-pointer">About</li>
-            </Link>
-            <Link href={`/component/Cart`}>
-              <li className="hover:text-purple-600 cursor-pointer">
-                <BsCart2 />
+        <div className="w-[100%] items-center">
+          {/* new navbar */}
+          <ul className="hidden md:flex gap-8 bg-customOffWhite w-[100%] h-28 items-center justify-around">
+            {/* Logo and Brand Name */}
+            <ul className="flex items-center gap-4 ">
+              <li>
+                <Image
+                  src={`/images/logo.png`}
+                  alt="logo"
+                  width={40}
+                  height={50}
+                />
               </li>
-            </Link>
-            <Link href={`/component/Contact`}>
-              <li className="bg-customGreen text-white px-6 py-2 rounded-md text-sm cursor-pointer hover:bg-green-900">
-                Contact
-              </li>
-            </Link>
+              <Link href={`/`}>
+                <li className="font-bold text-xl md:text-2xl cursor-pointer">
+                  Comforty
+                </li>
+              </Link>
+            
+              
+              
+            </ul>
+              {/* cart icon */}
+              <div>
+              <Link href={`/component/Cart`}>
+                <li className="hover:text-purple-600 cursor-pointer flex items-center gap-2 bg-white px-3 py-1 rounded-md">
+                  <span>
+                    <BsCart2 className="size-6" />
+                  </span>
+                  <span>cart</span>
+                </li>
+              </Link>
+              </div>
           </ul>
+
+          {/* previous navbar */}
+          <div className="flex">
+            <ul className="hidden md:flex items-center gap-8 bg-white">
+              <Link href={`/`}>
+                <li className="hover:text-purple-600 cursor-pointer">Home</li>
+              </Link>
+              <Link href={`/product`}>
+                <li className="hover:text-purple-600 cursor-pointer">
+                  Product
+                </li>
+              </Link>
+              <Link href={`/component/About`}>
+                <li className="hover:text-purple-600 cursor-pointer">About</li>
+              </Link>
+
+              <Link href={`/component/Contact`}>
+                <li className=" px-6 py-2 rounded-md text-sm cursor-pointer ">
+                  Contact
+                </li>
+              </Link>
+            </ul>
+            {/* contact button */}
+
+            <ul className="flex items-center bg-white w-[100%]">
+              <li className="text-slate-500">Contact:(808) 555-0111</li>
+            </ul>
+          </div>
 
           {/* Mobile Menu Toggle */}
           <div

@@ -2,20 +2,21 @@
 import React from "react";
 import Slider from "react-slick";
 import Image from "next/image";
-import { bannerData } from "@/app/data"; 
+import { bannerData } from "@/app/data";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { IoIosArrowRoundForward } from "react-icons/io";
 
 const Banner = () => {
   const settings = {
-    dots: true, 
+    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000, 
-    arrows: true, 
+    autoplaySpeed: 2000,
+    arrows: true,
   };
 
   return (
@@ -29,9 +30,15 @@ const Banner = () => {
               <h1 className="text-6xl md:text-7xl font-bold w-full md:w-[100%]">
                 {bannerData.heading}
               </h1>
-              <button className="bg-customGreen text-white px-10 py-3 rounded-md text-sm cursor-pointer hover:bg-green-900">
-                Shop Now
-              </button>
+              {/* button */}
+              <div>
+                <button className="bg-customGreen text-white px-5 py-2 rounded-md text-sm cursor-pointer hover:bg-green-900 flex items-center">
+                  Shop Now
+                  <span>
+                    <IoIosArrowRoundForward className="size-7" />
+                  </span>
+                </button>
+              </div>
             </div>
           </div>
 
