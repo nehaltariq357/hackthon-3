@@ -6,7 +6,8 @@ import { addToCart } from "../../redux/store/slice/cartSlice";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { client } from "@/sanity/lib/client";
-
+import { BsCart2 } from "react-icons/bs";
+import FeaturedProduct from "@/app/component/FeaturedProduct/page";
 interface types {
   title: string;
   price: number;
@@ -14,20 +15,20 @@ interface types {
   image: string;
   description: string;
   detailDesc: string;
-  imageUrl:string
-  PricewithoutDiscount:number
-  badge:string
-  inventory:number
-  category:{
-    title:string
-    CategoryImage:{
-      url:string
-    }
-  }
+  imageUrl: string;
+  PricewithoutDiscount: number;
+  badge: string;
+  inventory: number;
+  category: {
+    title: string;
+    CategoryImage: {
+      url: string;
+    };
+  };
 }
 
 const ProductPage = ({ params }: { params: { product_page: string } }) => {
-  const [product, setProduct] = useState<types |null>(null);
+  const [product, setProduct] = useState<types | null>(null);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -76,12 +77,8 @@ const ProductPage = ({ params }: { params: { product_page: string } }) => {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center px-4 md:px-10 lg:px-20 bg-white text-black">
-      <div className="w-full max-w-4xl bg-white p-10 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold mb-10 text-center">
-          {product.title}
-        </h1>
-
+    <main className="min-h-screen flex items-center justify-center px-4 md:px-10 lg:px-20 bg-white text-black py-36">
+      <div className="w-full bg-white p-10">
         {/* Product Details */}
         <div className="flex flex-col md:flex-row gap-10">
           {/* Product Image */}
@@ -96,18 +93,30 @@ const ProductPage = ({ params }: { params: { product_page: string } }) => {
           </div>
 
           {/* Product Info */}
-          <div className="w-full md:w-1/2 space-y-5">
-            <p className="text-xl font-bold text-green-600">{`$${product.price}`}</p>
-            <p className="text-gray-700">{product.detailDesc}</p>
+          <div className="w-full md:w-1/2 space-y-10">
+            <h1 className="text-5xl font-bold cursor-auto">{product.title}</h1>
+            <p className="text-white text-sm bg-customGreen w-fit px-3 py-1 rounded-full cursor-pointer">{`$${product.price.toFixed(2)} USD`}</p>
+            <hr />
             <p className="text-sm text-gray-500">{product.description}</p>
 
             {/* Add to Cart Button */}
             <button
               onClick={() => handleAddToCart(product)}
-              className="text-white bg-green-600 px-5 py-2 rounded-md cursor-pointer hover:bg-green-700"
+              className="text-white bg-customGreen px-5 py-2 rounded-md cursor-pointer hover:bg-green-700 flex items-center gap-2"
             >
+              <span>
+                {" "}
+                <BsCart2 className="size-5" />
+              </span>
               Add to Cart
             </button>
+          </div>
+        </div>
+        {/* featured products */}
+        <div>
+          {/* product listing */}
+          <div>
+            <FeaturedProduct />
           </div>
         </div>
       </div>

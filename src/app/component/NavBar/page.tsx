@@ -10,13 +10,13 @@ const NavBar = () => {
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-white z-50 text-black">
-      <div className="flex items-center justify-between h-20 ">
+      <div className="flex items-center justify-between h-28 ">
         {/* Desktop Menu */}
         <div className="w-[100%] items-center">
           {/* new navbar */}
-          <ul className="hidden md:flex gap-8 bg-customOffWhite w-[100%] h-28 items-center justify-around">
+          <ul className="hidden md:flex gap-8 bg-customOffWhite w-[100%] h-28 items-center justify-around pt-7">
             {/* Logo and Brand Name */}
-            <ul className="flex items-center gap-4 ">
+            <ul className="flex items-center gap-4">
               <li>
                 <Image
                   src={`/images/logo.png`}
@@ -48,32 +48,29 @@ const NavBar = () => {
           </ul>
 
           {/* previous navbar */}
-          <div className="flex">
-            <ul className="hidden md:flex items-center gap-8 bg-white">
-              <Link href={`/`}>
-                <li className="hover:text-purple-600 cursor-pointer">Home</li>
-              </Link>
-              <Link href={`/product`}>
-                <li className="hover:text-purple-600 cursor-pointer">
-                  Product
-                </li>
-              </Link>
-              <Link href={`/component/About`}>
-                <li className="hover:text-purple-600 cursor-pointer">About</li>
-              </Link>
+          <div className="flex justify-around w-[100%] h-16">
+  {/* Navigation Links */}
+  <ul className="hidden md:flex items-center gap-8 bg-white md:pl-[310px]">
+    <Link href={`/`}>
+      <li className="hover:text-purple-600 cursor-pointer">Home</li>
+    </Link>
+    <Link href={`/product`}>
+      <li className="hover:text-purple-600 cursor-pointer">Product</li>
+    </Link>
+    <Link href={`/component/About`}>
+      <li className="hover:text-purple-600 cursor-pointer">About</li>
+    </Link>
+    <Link href={`/component/Contact`}>
+      <li className="hover:text-purple-600 cursor-pointer">Contact</li>
+    </Link>
+  </ul>
 
-              <Link href={`/component/Contact`}>
-                <li className=" px-6 py-2 rounded-md text-sm cursor-pointer ">
-                  Contact
-                </li>
-              </Link>
-            </ul>
-            {/* contact button */}
+  {/* Contact Information */}
+  <ul className="flex items-center bg-white w-[100%] justify-center md:pl-72">
+    <li className="text-slate-500">Contact: (808) 555-0111</li>
+  </ul>
+</div>
 
-            <ul className="flex items-center bg-white w-[100%]">
-              <li className="text-slate-500">Contact:(808) 555-0111</li>
-            </ul>
-          </div>
 
           {/* Mobile Menu Toggle */}
           <div

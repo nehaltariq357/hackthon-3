@@ -20,7 +20,7 @@ const Banner = () => {
   };
 
   return (
-    <main>
+    <main className=" bg-white">
       <div className="bg-customOffWhite min-h-screen text-black pt-5 pb-10 md:pt-0 md:pb-0">
         <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen items-center">
           {/* Left Grid */}
