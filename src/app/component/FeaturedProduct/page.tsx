@@ -30,7 +30,7 @@ const FeaturedProduct = () => {
           price, 
           "imageUrl": image.asset->url, 
           "slug":slug.current
-        }[0..5]`;
+        }[0..3]`;
        
         const data: types[] = await client.fetch(query);
         setProduct(data);
@@ -59,14 +59,14 @@ const FeaturedProduct = () => {
 
   return (
     <main
-      className="px-4 md:px-10 lg:px-20 min-h-screen bg-white"
+      className="px-4 md:px-10 lg:px-20 bg-white"
       style={{ backgroundColor: "white" }}
     >
       {/* <h1 className="text-3xl font-bold py-5 text-black">Featured Products</h1> */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-black">
+      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-8 text-black">
         {product.map((post) => (
           <div key={post._id} className="my-10">
-            <div className="space-y-5 w-full md:w-[90%]">
+            <div className="space-y-5 w-full md:w-[90%] rounded-md">
               <Link href={`/product/${post.slug}`}>
                 <Image
                   src={post.imageUrl}
