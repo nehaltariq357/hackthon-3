@@ -4,13 +4,24 @@ import Image from "next/image";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsCart2 } from "react-icons/bs";
 import Link from "next/link";
-
-const NavBar = () => {
+interface NavBarProps {
+  cartCount: number;
+}
+const NavBar: React.FC<NavBarProps> = ({ cartCount }) => {
   const [isopen, setopen] = useState(false);
+  const [popoverVisible, setPopoverVisible] = useState(false);
+
+  // Toggle Popover visibility
+  const handlePopoverToggle = () => {
+    setPopoverVisible(!popoverVisible);
+    setTimeout(() => {
+      setPopoverVisible(false); // Hide after a few seconds
+    }, 3000); // You can adjust the time
+  };
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-white z-50 text-black">
-      <div className="flex items-center justify-between h-28 ">
+      <div className="flex items-center justify-between h-28">
         {/* Desktop Menu */}
         <div className="w-[100%] items-center">
           {/* new navbar */}
@@ -30,47 +41,48 @@ const NavBar = () => {
                   Comforty
                 </li>
               </Link>
-            
-              
-              
             </ul>
-              {/* cart icon */}
-              <div>
+
+            {/* cart icon */}
+            <div>
               <Link href={`/component/Cart`}>
-                <li className="hover:text-purple-600 cursor-pointer flex items-center gap-2 bg-white px-3 py-1 rounded-md">
+                <li
+                  className="hover:text-purple-600 cursor-pointer flex items-center gap-2 bg-white px-3 py-1 rounded-md"
+                  onClick={handlePopoverToggle}
+                >
                   <span>
                     <BsCart2 className="size-6" />
                   </span>
                   <span>cart</span>
+                  <span className="ml-2 text-teal-500 font-bold">{cartCount}</span>
                 </li>
               </Link>
-              </div>
+            </div>
           </ul>
 
           {/* previous navbar */}
           <div className="flex justify-around w-[100%] h-16">
-  {/* Navigation Links */}
-  <ul className="hidden md:flex items-center gap-8 bg-white md:pl-[310px]">
-    <Link href={`/`}>
-      <li className="hover:text-purple-600 cursor-pointer">Home</li>
-    </Link>
-    <Link href={`/product`}>
-      <li className="hover:text-purple-600 cursor-pointer">Product</li>
-    </Link>
-    <Link href={`/component/About`}>
-      <li className="hover:text-purple-600 cursor-pointer">About</li>
-    </Link>
-    <Link href={`/component/Contact`}>
-      <li className="hover:text-purple-600 cursor-pointer">Contact</li>
-    </Link>
-  </ul>
+            {/* Navigation Links */}
+            <ul className="hidden md:flex items-center gap-8 bg-white md:pl-[310px]">
+              <Link href={`/`}>
+                <li className="hover:text-purple-600 cursor-pointer">Home</li>
+              </Link>
+              <Link href={`/product`}>
+                <li className="hover:text-purple-600 cursor-pointer">Product</li>
+              </Link>
+              <Link href={`/component/About`}>
+                <li className="hover:text-purple-600 cursor-pointer">About</li>
+              </Link>
+              <Link href={`/component/Contact`}>
+                <li className="hover:text-purple-600 cursor-pointer">Contact</li>
+              </Link>
+            </ul>
 
-  {/* Contact Information */}
-  <ul className="flex items-center bg-white w-[100%] justify-center md:pl-72">
-    <li className="text-slate-500">Contact: (808) 555-0111</li>
-  </ul>
-</div>
-
+            {/* Contact Information */}
+            <ul className="flex items-center bg-white w-[100%] justify-center md:pl-72">
+              <li className="text-slate-500">Contact: (808) 555-0111</li>
+            </ul>
+          </div>
 
           {/* Mobile Menu Toggle */}
           <div
@@ -108,6 +120,13 @@ const NavBar = () => {
                 </li>
               </Link>
             </ul>
+          </div>
+        )}
+
+        {/* Popover Notification */}
+        {popoverVisible && (
+          <div className="fixed top-20 right-5 bg-teal-500 text-white p-4 rounded-md shadow-md">
+            <p>Item added to the cart!</p>
           </div>
         )}
       </div>
