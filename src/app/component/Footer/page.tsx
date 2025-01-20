@@ -1,62 +1,94 @@
 import React from "react";
+import Link from "next/link";
 import Image from "next/image";
+import { FaGithubSquare, FaLinkedin } from "react-icons/fa";
 const Footer = () => {
   return (
-    <main className="bg-white ">
-      <div className="py-10 bg-customGreen h-auto md:h-96 text-white flex flex-col justify-center items-center space-y-7 px-10 md:px-8">
-        <h1 className="font-semibold text-2xl md:text-3xl lg:text-5xl w-full md:w-[60%] lg:w-[40%] text-center">
-          Get our stories delivered From us to your inbox weekly.
-        </h1>
-        <div className="flex flex-col md:flex-row gap-3 w-full md:w-auto justify-center">
-          <input
-            type="text"
-            placeholder="Your Email"
-            className="py-3 px-4 md:px-12 rounded-lg flex-1"
-          />
-          <button className="border-2 border-white py-3 px-5 rounded-lg hover:bg-white hover:text-customGreen">
-            Get Started
-          </button>
+    <footer className="bg-white text-black py-10">
+      <div className="container mx-auto px-6 lg:px-20">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* About Section */}
+          <div className="flex flex-col gap-5">
+            <div className="mb-4 flex gap-2">
+              <span>
+              <Image src={`/images/logo.png`} alt="logo" width={40} height={50} />
+              </span>
+              <span className="text-[#272343] text-[26px] font-semibold">Comforty</span>
+            </div>
+            <p className="text-gray-400 leading-6">
+            Vivamus tristique odio sit amet velit semper, eu posuere turpis interdum.
+            Cras egestas purus 
+            </p>
+            <div className="flex gap-5 items-center text-3xl">
+            <Link href={"https://www.linkedin.com/in/nehaltariqq/"} target="_blank"><FaLinkedin /></Link>
+            <Link href={"https://github.com/nehaltariq357"} target="_blank"> <FaGithubSquare /></Link>
+            </div>
+          </div>
+
+          {/* Navigation Links */}
+          <div className="ml-14">
+            <h3 className="text-lg font-bold mb-4 text-[#9A9CAA]">Quick Links</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/About" className="hover:text-gray-300">About Us</Link>
+              </li>
+              <li>
+                <Link href="/product" className="hover:text-gray-300">Products</Link>
+              </li>
+              <li>
+                <Link href="/Contact" className="hover:text-gray-300">Contact Us</Link>
+              </li>
+            </ul>
+          </div>
+
+          <div className="ml-14">
+            <h3 className="text-lg font-bold mb-4 text-[#9A9CAA]">Support</h3>
+            <ul className="space-y-2">
+              <li>
+                Help & Support
+              </li>
+              <li>
+                Terms & Conditions
+              </li>
+              <li>
+                Privacy Policy
+              </li>
+              <li>Help</li>
+            </ul>
+          </div>
+
+          
+          {/* Newsletter Subscription */}
+          <div>
+            <h3 className="text-lg font-bold mb-4">Newsteller</h3>
+            <form className="flex flex-col space-y-2 items-center justify-center">
+              <input
+                type="email"
+                placeholder="Your email"
+                className="w-full px-4 py-2 text-black rounded-md border border-gray-500"
+              />
+              <button
+                type="submit"
+                className="bg-[#029FAE] text-white px-4 py-2 rounded-md"
+              >
+                Subscribe
+              </button>
+            </form>
+            <p className="text-sm text-gray-400 mt-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+          </div>
         </div>
-        <p className="text-slate-300 text-sm md:text-base text-center w-full md:w-[80%] lg:w-[30%]">
-          Get a response tomorrow if you submit by 9pm today. If we receive it
-          after 9pm, you will get a response the following day.
-        </p>
+        {/* Bottom Bar */}
+        <div className="border-t border-gray-200 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-gray-400 text-sm">
+            © {new Date().getFullYear()} Nehal, Inc. All rights reserved.
+          </p>
+          <div className="space-x-6 text-gray-400 text-sm mt-4 md:mt-0">
+            <a href="/privacy-policy" className="hover:text-gray-300">Privacy Policy</a>
+            <a href="/terms-of-service" className="hover:text-gray-300">Terms of Service</a>
+          </div>
+        </div>
       </div>
-      {/* 2nd div */}
-      <div className="py-10 flex flex-col justify-center items-center h-auto md:h-96 space-y-10 px-5 md:px-10">
-        {/* Logo and Name */}
-        <ul className="flex flex-col md:flex-row gap-3 md:gap-5 items-center">
-          <li>
-            <Image src={`/images/logo.png`} alt="logo" width={40} height={50} />
-          </li>
-          <li className="font-bold text-xl md:text-2xl text-customGreen">E-Commerce</li>
-        </ul>
-        <div className="list-none flex flex-col md:flex-row gap-5 md:gap-16 text-center text-black">
-          <li className="hover:underline cursor-pointer ">Home</li>
-          <li className="hover:underline cursor-pointer">Product</li>
-          <li className="hover:underline cursor-pointer">About</li>
-          <li className="hover:underline cursor-pointer">Contact</li>
-        </div>
-        <div className="list-none flex gap-3 md:gap-5 text-white text-sm">
-          <li className="bg-customGreen rounded-full py-2 px-3 md:py-3 md:px-4">
-            FB
-          </li>
-          <li className="bg-customGreen rounded-full py-2 px-3 md:py-3 md:px-4">
-            IG
-          </li>
-          <li className="bg-customGreen rounded-full py-2 px-3 md:py-3 md:px-4">
-            LN
-          </li>
-          <li className="bg-customGreen rounded-full py-2 px-3 md:py-3 md:px-4">
-            YT
-          </li>
-        </div>
-        <hr className="w-full md:w-[80%] border-t-[1px] border-customGreen mt-5" />
-        <p className="text-xs md:text-sm text-center text-black">
-          Copyright Ideapeel Inc © 2024. All Rights Reserved.
-        </p>
-      </div>
-    </main>
+    </footer>
   );
 };
 
