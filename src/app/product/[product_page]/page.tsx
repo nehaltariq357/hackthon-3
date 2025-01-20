@@ -11,7 +11,7 @@ import FeaturedProduct from "@/app/component/FeaturedProduct/page";
 interface types {
   title: string;
   price: number;
-  id: number;
+  id: string;
   image: string;
   description: string;
   detailDesc: string;
@@ -116,6 +116,7 @@ const ProductPage = ({ params }: { params: { product_page: string } }) => {
         <div>
           {/* product listing */}
           <div>
+          <h1 className="text-3xl font-bold py-5 text-black pl-[85px]">Featured Products</h1>
             <FeaturedProduct />
           </div>
         </div>

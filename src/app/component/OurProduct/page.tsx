@@ -44,7 +44,7 @@ const OurProduct = () => {
   const handleAddToCart = (item: types) => {
     dispatch(
       addToCart({
-        id: item._id,
+        id:item._id,
         title: item.title,
         price: item.price,
         image: item.imageUrl,
