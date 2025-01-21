@@ -62,7 +62,7 @@ const OurProduct = () => {
       className="px-4 md:px-10 lg:px-20 bg-white min-h-screen pb-24"
       style={{ backgroundColor: "white" }}
     >
-      {/* <h1 className="text-3xl font-bold py-5 text-black">Featured Products</h1> */}
+      {/* <h1 className="text-3xl font-bold py-5 text-black">Featured Products</h1> ***/}
       <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-8 text-black">
         {product.map((post) => (
           <div key={post._id} className="my-10">
