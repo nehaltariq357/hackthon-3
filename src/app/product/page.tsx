@@ -1,6 +1,6 @@
 import React from "react";
 import FeaturedProduct from "../component/FeaturedProduct/page";
-import Category from "../component/category/page";
+import Category from "../component/category/page"
 import GridLayout from "../component/grid-layout/page";
 import OurProduct from "../component/OurProduct/page";
 
