@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+
 import Image from "next/image";
 import { useAppSelector, useAppDispatch } from "../../redux/store/slice/hooks";
 import {
@@ -8,30 +8,30 @@ import {
   decreaseQuantity,
 } from "../../redux/store/slice/cartSlice";
 import NavBar from "../NavBar/page";
-
+type CartItem = {
+  id: string; // or number, depending on your data
+  title: string;
+  image: string;
+  price: number;
+  quantity: number;
+};
 const Cart = () => {
   const cartItems = useAppSelector((state) => state.cart.items);
   const totalAmount = useAppSelector((state) => state.cart.totalAmount);
   const dispatch = useAppDispatch();
 
-  const [popoverItemId, setPopoverItemId] = useState<string | null>(null);
 
-  const handleRemoveItem = (item) => {
+  const handleRemoveItem = (item:CartItem) => {
     dispatch(removeFromCart(item.id));
   };
 
-  const handleIncreaseQuantity = (item) => {
+  const handleIncreaseQuantity = (item:CartItem) => {
     dispatch(increaseQuantity(item.id));
   };
 
-  const handleDecreaseQuantity = (item) => {
+  const handleDecreaseQuantity = (item:CartItem) => {
     dispatch(decreaseQuantity(item.id));
   };
-
-  const togglePopover = (itemId: string | null) => {
-    setPopoverItemId(itemId === popoverItemId ? null : itemId);
-  };
-
   // Calculate total quantity
   const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -107,14 +107,21 @@ const Cart = () => {
                 <p>Subtotal</p>
                 <p>${totalAmount.toFixed(2)}</p>
               </div>
+              <div className="flex justify-between">
+                <p>Estimated Delivery & Handling</p>
+                <p>Free</p>
+              </div>
               <div className="flex justify-between font-bold text-lg sm:text-xl">
                 <p>Total</p>
                 <p>${totalAmount.toFixed(2)}</p>
               </div>
             </div>
-            <button className="mt-6 w-full bg-teal-500 text-white py-3 rounded-md text-center font-bold hover:bg-teal-600">
+            {/* checkout */}
+            <div className="w-full flex justify-center">
+            <button className="mt-6 px-14 bg-customGreen text-white py-3 rounded-full text-center hover:bg-teal-600">
               Checkout
             </button>
+            </div>
           </div>
         )}
       </div>

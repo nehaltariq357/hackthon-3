@@ -15,8 +15,8 @@ const NavBar: React.FC<NavBarProps> = ({ cartCount }) => {
   const handlePopoverToggle = () => {
     setPopoverVisible(!popoverVisible);
     setTimeout(() => {
-      setPopoverVisible(false); // Hide after a few seconds
-    }, 3000); // You can adjust the time
+      setPopoverVisible(false); 
+    }, 3000); 
   };
 
   return (
