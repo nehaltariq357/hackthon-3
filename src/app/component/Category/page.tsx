@@ -8,7 +8,7 @@ interface ICategory {
   products: number;
 }
 
-const CategoryPage = async () => {
+const Category = async () => {
   const query = `*[_type == "categories"]{title, products, "image": image.asset->url}`;
   const data = await client.fetch(query);
 
@@ -45,4 +45,4 @@ const CategoryPage = async () => {
   );
 };
 
-export default CategoryPage;
+export default Category;

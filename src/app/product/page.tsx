@@ -1,6 +1,6 @@
 import React from "react";
 import FeaturedProduct from "../component/FeaturedProduct/page";
-import CategoryPage from "../component/category/page"
+import Category from "../component/category/page"
 import GridLayout from "../component/grid-layout/page";
 import OurProduct from "../component/OurProduct/page";
 
@@ -14,7 +14,7 @@ const product = () => {
       <FeaturedProduct />
       {/* category */}
       <h1 className="text-3xl font-bold py-5 text-black pl-[85px]">Top Categories</h1>
-      <CategoryPage/>
+      <Category/>
       {/* grid layout */}
       <GridLayout/>
      {/* our product */}
