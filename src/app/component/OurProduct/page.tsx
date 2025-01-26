@@ -89,7 +89,7 @@ const OurProduct = () => {
                   </button>
                 </div>
               </Link>
-              {/* add to cart */}
+             
             </div>
           </div>
         ))}

@@ -8,6 +8,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { client } from "@/sanity/lib/client";
 import { BsCart2 } from "react-icons/bs";
+
 interface types {
   _id: string;
   title: string;
@@ -93,6 +94,7 @@ const FeaturedProduct = () => {
             </div>
           </div>
         ))}
+       
       </div>
       <ToastContainer />
     </main>

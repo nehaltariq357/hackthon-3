@@ -4,12 +4,17 @@ import Image from "next/image";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsCart2 } from "react-icons/bs";
 import Link from "next/link";
+
 interface NavBarProps {
   cartCount: number;
 }
+const items = ["Sofa", "Chair", "Table", "Lamp", "Bookshelf"]; // Example items
 const NavBar: React.FC<NavBarProps> = ({ cartCount }) => {
   const [isopen, setopen] = useState(false);
   const [popoverVisible, setPopoverVisible] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredItems, setFilteredItems] = useState<string[]>([]);
+  
 
   // Toggle Popover visibility
   const handlePopoverToggle = () => {
@@ -17,6 +22,22 @@ const NavBar: React.FC<NavBarProps> = ({ cartCount }) => {
     setTimeout(() => {
       setPopoverVisible(false);
     }, 3000);
+  };
+
+
+  // Handle search input change
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+
+    if (query) {
+      const results = items.filter((item) =>
+        item.toLowerCase().includes(query.toLowerCase())
+      );
+      setFilteredItems(results);
+    } else {
+      setFilteredItems([]);
+    }
   };
 
   return (
@@ -111,6 +132,8 @@ const NavBar: React.FC<NavBarProps> = ({ cartCount }) => {
                     </button>
                   </span>
                   <input
+                    value={searchQuery}
+                    onChange={handleSearchChange}
                     type="search"
                     name="Search"
                     placeholder="Search..."
