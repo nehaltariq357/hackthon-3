@@ -208,6 +208,15 @@ const NavBar: React.FC<NavBarProps> = ({ cartCount }) => {
           </div>
         )}
       </div>
+     <div className="absolute top-48 left-[50%]">
+     {filteredItems.map((item)=>(
+        <div key={item}>
+         <ul>
+          {item}
+         </ul>
+        </div>
+      ))}
+     </div>
     </nav>
   );
 };
