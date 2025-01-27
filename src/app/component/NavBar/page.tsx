@@ -1,21 +1,43 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsCart2 } from "react-icons/bs";
 import Link from "next/link";
-
+import { client } from "@/sanity/lib/client";
+import { types } from "../OurProduct/page";
 interface NavBarProps {
   cartCount: number;
 }
-const items = ["Sofa", "Chair", "Table", "Lamp", "Bookshelf"]; // Example items
+
+
+//const items = ["Sofa", "Chair", "Table", "Lamp", "Bookshelf"]; // Example items
 const NavBar: React.FC<NavBarProps> = ({ cartCount }) => {
   const [isopen, setopen] = useState(false);
   const [popoverVisible, setPopoverVisible] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredItems, setFilteredItems] = useState<string[]>([]);
-  
+  const [filteredItems, setFilteredItems] = useState<types[]>([]);
+  const [items, setitems] = useState<types[]>([]);
 
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const query = `*[_type == "products"]{
+          _id, 
+          title, 
+          price, 
+          "imageUrl": image.asset->url, 
+          "slug":slug.current
+        }[0..100]`;
+       
+        const data: types[] = await client.fetch(query);
+        setitems(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+    fetchPosts();
+  }, []);
   // Toggle Popover visibility
   const handlePopoverToggle = () => {
     setPopoverVisible(!popoverVisible);
@@ -29,16 +51,24 @@ const NavBar: React.FC<NavBarProps> = ({ cartCount }) => {
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
     setSearchQuery(query);
+   
 
     if (query) {
       const results = items.filter((item) =>
-        item.toLowerCase().includes(query.toLowerCase())
+        item.title.toLowerCase().includes(query.toLowerCase())
       );
       setFilteredItems(results);
     } else {
       setFilteredItems([]);
     }
   };
+
+ // clear search input 
+
+ const clearSearch = ()=>{
+  setSearchQuery("")
+  setFilteredItems([])
+ }
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-white z-50 text-black">
@@ -208,15 +238,45 @@ const NavBar: React.FC<NavBarProps> = ({ cartCount }) => {
           </div>
         )}
       </div>
-     <div className="absolute top-48 left-[50%]">
-     {filteredItems.map((item)=>(
-        <div key={item}>
-         <ul>
-          {item}
-         </ul>
-        </div>
-      ))}
-     </div>
+      <div className="absolute top-16 left-1/2 transform -translate-x-1/2">
+  <div>
+    {/* Filtered Items */}
+    {filteredItems.length > 0 && (
+      <div className="absolute top-20 left-1/2 transform -translate-x-1/2 bg-white shadow-lg rounded-md p-4 w-96 z-50 h-64 overflow-y-auto">
+        <ul>
+          {filteredItems.map((item) => (
+            <li key={item._id} className="mb-2" onClick={clearSearch}>
+              <Link
+                href={{
+                  pathname: "/component/FilterItems",
+                  query: {
+                    itemName: item.title,
+                    price: item.price,
+                    image: item.imageUrl,
+                  },
+                }}
+              >
+                <div className="flex items-center gap-4">
+                  <Image
+                    src={item.imageUrl}
+                    alt={item.title}
+                    width={50}
+                    height={50}
+                    className="rounded-md"
+                  />
+                  <span className="text-blue-500 hover:underline">
+                    {item.title}
+                  </span>
+                </div>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </div>
+</div>
+
     </nav>
   );
 };
