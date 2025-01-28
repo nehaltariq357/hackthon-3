@@ -60,7 +60,7 @@ const FilterItems = () => {
             <h1 className="text-5xl font-bold cursor-auto">{itemName}</h1>
             <p className="text-white text-sm bg-customGreen w-fit px-3 py-1 rounded-full cursor-pointer">{`$${parseFloat(price).toFixed(2)} USD`}</p>
             <hr />
-            <p className="text-sm text-gray-500">This is a placeholder description for the product. More details will go here.</p>
+            <p className="text-sm text-gray-500">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident esse consequuntur enim accusamus, inventore voluptate quidem quibusdam fugit ad dignissimos ab necessitatibus animi eos, nam, odio unde tempore est voluptates?</p>
 
             {/* Add to Cart Button */}
             <button

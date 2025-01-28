@@ -8,6 +8,7 @@ import {
   decreaseQuantity,
 } from "../../redux/store/slice/cartSlice";
 import NavBar from "../NavBar/page";
+import Link from "next/link";
 type CartItem = {
   id: string; // or number, depending on your data
   title: string;
@@ -117,11 +118,13 @@ const Cart = () => {
               </div>
             </div>
             {/* checkout */}
+            <Link href={"/component/CheckOut"}>
             <div className="w-full flex justify-center">
             <button className="mt-6 px-14 bg-customGreen text-white py-3 rounded-full text-center hover:bg-teal-600">
               Checkout
             </button>
             </div>
+            </Link>
           </div>
         )}
       </div>
