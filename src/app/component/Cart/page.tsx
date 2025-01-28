@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+
 import { useAppSelector, useAppDispatch } from "../../redux/store/slice/hooks";
 import {
   removeFromCart,
@@ -8,7 +10,7 @@ import {
   decreaseQuantity,
 } from "../../redux/store/slice/cartSlice";
 import NavBar from "../NavBar/page";
-import Link from "next/link";
+
 type CartItem = {
   id: string; // or number, depending on your data
   title: string;
@@ -16,32 +18,51 @@ type CartItem = {
   price: number;
   quantity: number;
 };
+
 const Cart = () => {
+
   const cartItems = useAppSelector((state) => state.cart.items);
   const totalAmount = useAppSelector((state) => state.cart.totalAmount);
   const dispatch = useAppDispatch();
-
-
-  const handleRemoveItem = (item:CartItem) => {
+  const router = useRouter();
+  const handleRemoveItem = (item: CartItem) => {
     dispatch(removeFromCart(item.id));
   };
 
-  const handleIncreaseQuantity = (item:CartItem) => {
+  const handleIncreaseQuantity = (item: CartItem) => {
     dispatch(increaseQuantity(item.id));
   };
 
-  const handleDecreaseQuantity = (item:CartItem) => {
+  const handleDecreaseQuantity = (item: CartItem) => {
     dispatch(decreaseQuantity(item.id));
   };
   // Calculate total quantity
   const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const handleCheckout = async () => {
+    
 
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cartItems }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to create checkout session");
+      }
+
+      const { url } = await res.json();
+      router.push(url); 
+    } catch (err) {
+      console.error(err);
+      alert("An error occurred while redirecting to Stripe checkout.");
+    }
+  };
   return (
     <main className="px-4 sm:px-6 lg:px-20 min-h-screen bg-white text-black pt-28">
       <NavBar cartCount={totalQuantity} /> {/* Pass cart count */}
-
       <h1 className="text-2xl sm:text-3xl font-bold my-8 sm:my-10">Bag</h1>
-
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="flex-1">
           {cartItems.length > 0 ? (
@@ -60,7 +81,9 @@ const Cart = () => {
                   />
 
                   <div className="flex-1">
-                    <h2 className="font-bold text-lg sm:text-xl">{item.title}</h2>
+                    <h2 className="font-bold text-lg sm:text-xl">
+                      {item.title}
+                    </h2>
                     <span className="text-sm text-gray-500">
                       Quantity: {item.quantity}
                     </span>
@@ -96,7 +119,9 @@ const Cart = () => {
               ))}
             </div>
           ) : (
-            <p className="text-gray-600 mt-16 text-center">Your cart is empty.</p>
+            <p className="text-gray-600 mt-16 text-center">
+              Your cart is empty.
+            </p>
           )}
         </div>
 
@@ -118,13 +143,15 @@ const Cart = () => {
               </div>
             </div>
             {/* checkout */}
-            <Link href={"/component/CheckOut"}>
+
             <div className="w-full flex justify-center">
-            <button className="mt-6 px-14 bg-customGreen text-white py-3 rounded-full text-center hover:bg-teal-600">
-              Checkout
-            </button>
+              <button
+                onClick={handleCheckout}
+                className="mt-6 px-14 bg-customGreen text-white py-3 rounded-full text-center hover:bg-teal-600"
+              >
+                Checkout
+              </button>
             </div>
-            </Link>
           </div>
         )}
       </div>
