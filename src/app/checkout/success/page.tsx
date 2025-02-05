@@ -52,7 +52,7 @@ export default function Success() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    ///// Validation
+    ///////// Validation
     if (!firstName || !lastName || !email || !address || !city || !zipCode || !phone) {
       toast.error("Please fill out all required fields.");
       return;
