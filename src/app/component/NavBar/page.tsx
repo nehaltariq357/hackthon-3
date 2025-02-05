@@ -78,6 +78,7 @@ const NavBar: React.FC<NavBarProps> = ({ cartCount }) => {
           {/* new navbar */}
           <ul className="hidden md:flex gap-8 bg-customOffWhite w-[100%] h-28 items-center justify-around pt-7">
             {/* Logo and Brand Name */}
+                <Link href={`/`}>
             <ul className="flex items-center gap-4">
               <li>
                 <Image
@@ -87,12 +88,11 @@ const NavBar: React.FC<NavBarProps> = ({ cartCount }) => {
                   height={50}
                 />
               </li>
-              <Link href={`/`}>
                 <li className="font-bold text-xl md:text-2xl cursor-pointer">
                   Comforty
                 </li>
-              </Link>
             </ul>
+              </Link>
 
             {/* cart icon */}
             <div>

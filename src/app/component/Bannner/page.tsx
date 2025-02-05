@@ -50,9 +50,10 @@ const Banner = () => {
                   <div className="relative w-full h-[300px] md:h-[500px] overflow-hidden flex items-center justify-center">
                     <Image
                       src={image}
-                      alt="pic"
-                      fill
-                      objectFit="contain"
+                      alt="Banner image"
+                      width={450}
+                      height={300}
+                      style={{ objectFit: "contain" }} 
                       className="rounded-md "
                     />
                   </div>
