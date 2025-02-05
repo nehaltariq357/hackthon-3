@@ -62,7 +62,7 @@ const Cart = () => {
 
   return (
     <main className="px-4 sm:px-6 lg:px-20 min-h-screen bg-white text-black pt-28">
-      <NavBar cartCount={totalQuantity} /> {/* Pass cart count */}
+      <NavBar cartCount={totalQuantity} /> 
       <h1 className="text-2xl sm:text-3xl font-bold my-8 sm:my-10">Bag</h1>
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="flex-1">

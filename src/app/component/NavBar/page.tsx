@@ -11,7 +11,7 @@ interface NavBarProps {
 }
 
 
-//const items = ["Sofa", "Chair", "Table", "Lamp", "Bookshelf"]; // Example items
+
 const NavBar: React.FC<NavBarProps> = ({ cartCount }) => {
   const [isopen, setopen] = useState(false);
   const [popoverVisible, setPopoverVisible] = useState(false);
@@ -38,7 +38,7 @@ const NavBar: React.FC<NavBarProps> = ({ cartCount }) => {
     };
     fetchPosts();
   }, []);
-  // Toggle Popover visibility
+  
   const handlePopoverToggle = () => {
     setPopoverVisible(!popoverVisible);
     setTimeout(() => {

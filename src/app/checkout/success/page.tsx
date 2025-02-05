@@ -5,7 +5,7 @@ import { client } from "@/sanity/lib/client";
 import { useAppSelector } from "../../redux/store/slice/hooks";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { v4 as uuidv4 } from "uuid"; // Import uuid for generating unique keys
+import { v4 as uuidv4 } from "uuid"; 
 export default function Success() {
   const [orderCreated, setOrderCreated] = useState(false);
   // Form state variables
@@ -19,7 +19,7 @@ export default function Success() {
 
   const cartItems = useAppSelector((state) => state.cart.items);
 
-  // This function is now triggered on form submission.
+  
   interface CartItem {
     id: string;
     quantity: number;
@@ -59,7 +59,7 @@ export default function Success() {
     }
 
     try {
-      // Build your order data object, including form values
+      
       const orderData: OrderData = {
         _type: "order",
         firstName,
@@ -70,23 +70,23 @@ export default function Success() {
         zipCode,
         phone,
         cartItems: cartItems.map((item: CartItem) => ({
-          _key: uuidv4(), // Generate a unique key for each item
-          _type: "cartItem", // Use a custom type for cart items
+          _key: uuidv4(), 
+          _type: "cartItem", 
           product: {
             _type: "reference",
             _ref: item.id,
           },
-          quantity: item.quantity, // Include quantity here
+          quantity: item.quantity, 
         })),
         total: cartItems.reduce(
           (total: number, item: CartItem) => total + item.price * item.quantity,
           0
         ),
-        status: "success", // Default status
+        status: "success", 
         createdAt: new Date().toISOString(),
       };
 
-      console.log("Sending order to Sanity:", orderData); // Debugging
+      console.log("Sending order to Sanity:", orderData); 
 
       const response = await client.create(orderData);
       console.log("Order created in Sanity:", response);

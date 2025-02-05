@@ -24,9 +24,9 @@ export async function POST(request: Request) {
         currency: "usd",
         product_data: {
           name: item.title,
-          images: [item.image], // Optional
+          images: [item.image], 
         },
-        unit_amount: item.price * 100, // Stripe requires prices in cents
+        unit_amount: item.price * 100, 
       },
       quantity: item.quantity,
     }));
@@ -41,13 +41,13 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ url: session.url });
   } catch (err: unknown) {
-    // Handle the error explicitly
+    
     if (err instanceof Error) {
       console.error(err.message);
       return new NextResponse(err.message, { status: 500 });
     }
 
-    // Fallback for unexpected error types
+    
     console.error("Unexpected error", err);
     return new NextResponse("An unexpected error occurred", { status: 500 });
   }
