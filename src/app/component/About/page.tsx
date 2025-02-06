@@ -2,7 +2,7 @@ import React from 'react';
 
 const About = () => {
   return (
-    <div className="bg-gray-50 px-4 md:px-8 lg:px-16 mt-10">
+    <div className="bg-gray-50 px-4 md:px-8 lg:px-16 mt-10 pt-32">
       {/*/ Header Section *****/}
       <div className="flex flex-col items-center justify-center text-center space-y-6">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-customGreen leading-tight my-10">
