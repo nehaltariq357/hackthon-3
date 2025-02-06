@@ -31,8 +31,8 @@ const Banner = () => {
                 {bannerData.heading}
               </h1>
               {/* button */}
-              <div>
-                <button className="bg-customGreen text-white px-5 py-2 rounded-md text-sm cursor-pointer hover:bg-green-900 flex items-center">
+              <div className="flex justify-center md:justify-start">
+                <button className="bg-customGreen text-white px-5 py-2 rounded-md text-sm cursor-pointer hover:bg-green-900 flex items-center justify-center ">
                   Shop Now
                   <span>
                     <IoIosArrowRoundForward className="size-7" />

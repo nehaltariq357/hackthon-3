@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const GridLayout = () => {
   return (
-    <div className="relative p-4 flex justify-center items-center min-h-screen">
+    <div className="relative p-4 flex justify-center items-center my-10">
       <div className="grid grid-cols-4 gap-4 items-center">
         {/* Left side: Large image */}
         <div className="col-span-2 flex justify-center">
@@ -47,11 +47,6 @@ const GridLayout = () => {
             className="w-full h-auto object-cover"
           />
         </div>
-      </div>
-
-      {/* Optional vertical text */}
-      <div className="absolute left-0 top-1/2 transform -translate-y-1/2 -rotate-90 text-lg font-bold">
-        Explore New and Popular Styles
       </div>
     </div>
   );
