@@ -18,7 +18,6 @@ export async function POST(request: Request) {
 
   
     const { cartItems }: { cartItems: CartItem[] } = body;
-
     const lineItems = cartItems.map((item) => ({
       price_data: {
         currency: "usd",
