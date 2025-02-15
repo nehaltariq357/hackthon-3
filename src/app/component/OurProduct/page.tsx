@@ -59,7 +59,7 @@ const OurProduct = () => {
 
   return (
     <main
-      className="px-4 md:px-10 lg:px-20 bg-white min-h-screen pb-24"
+      className="px-4 md:px-10 lg:px-20 bg-white min-h-screen pb-24 "
       style={{ backgroundColor: "white" }}
     >
       {/* <h1 className="text-3xl font-bold py-5 text-black">Featured Products</h1> ***/}

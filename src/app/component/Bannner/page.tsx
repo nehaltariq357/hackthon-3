@@ -6,7 +6,7 @@ import { bannerData } from "@/app/data";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { IoIosArrowRoundForward } from "react-icons/io";
-
+import Link from "next/link";
 const Banner = () => {
   const settings = {
     dots: true,
@@ -32,12 +32,14 @@ const Banner = () => {
               </h1>
               {/* button */}
               <div className="flex justify-center md:justify-start">
+                <Link href={"/product"}>
                 <button className="bg-customGreen text-white px-5 py-2 rounded-md text-sm cursor-pointer hover:bg-green-900 flex items-center justify-center ">
                   Shop Now
                   <span>
                     <IoIosArrowRoundForward className="size-7" />
                   </span>
                 </button>
+                </Link>
               </div>
             </div>
           </div>
